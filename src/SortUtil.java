@@ -6,7 +6,15 @@ import java.util.List;
 public class SortUtil {
 
     public static void bubbleSort(List<Book> books, Comparator<Book> comparator) {
-        // TODO - missing code
+        int n = books.size();
+
+        for(int i = 0; i < n - 1; i++){
+            for(int j = 0; j < n - 1 - i; j++){
+                if(comparator.compare(books.get(j), books.get(j + 1)) > 0){
+                    Collections.swap(books, j, j + 1);
+                }
+            }
+        }
     }
 
     public static void insertionSort(List<Book> books, Comparator<Book> comparator) {
