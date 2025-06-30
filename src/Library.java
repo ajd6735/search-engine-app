@@ -31,8 +31,23 @@ public class Library {
     }
 
     public Book searchBookByKeyword(String keyword) {
-        // TODO missing code
-        return null;
+
+        keyword = keyword.toLowerCase();
+        int n = books.size();
+        Book book = null;
+
+        for(int i = 0; i < n; i++){
+            Book b = books.get(i);
+            String title = b.getTitle().toLowerCase();
+            String author = b.getAuthor().toLowerCase();
+            int year = b.getPublicationYear();
+
+            if(keyword.equals(title) || keyword.equals(author)
+            || keyword.equals(String.valueOf(year))){
+                book = books.get(i);
+            }
+        }
+        return book;
     }
 
 
