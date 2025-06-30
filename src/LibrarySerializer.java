@@ -28,7 +28,10 @@ public class LibrarySerializer {
 
             System.err.println("The file is empty or corrupted: " + fileName);
             return null;
-        } catch (IOException | ClassNotFoundException e) {
+//        } catch (IOException | ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;

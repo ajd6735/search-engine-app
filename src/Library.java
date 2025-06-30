@@ -11,8 +11,17 @@ public class Library {
     public void loadBooks(String fileName) {
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String line;
+
             while ((line = br.readLine()) != null) {
+
                //  TODO - missing code
+                String[] details = line.split(",");
+                if(details.length  == 3){
+                    String title = details[0];
+                    String author = details[1];
+                    int year = Integer.parseInt(details[2].trim());
+                    books.add(new Book(title, author, year));
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
