@@ -1,7 +1,10 @@
 
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class UserInteractionLogger {
 
@@ -25,6 +28,17 @@ public class UserInteractionLogger {
     // Generic method to log messages with a timestamp
     public void log(String message) {
     // TODO - missing code.
+        try{
+            FileWriter fw = new FileWriter(LOG_FILE, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            LocalDateTime date = LocalDateTime.now();
+            bw.write("[" + date.toString() + "] " + message);
+            bw.newLine();
+            bw.close();
+        } catch (IOException e) {
+            System.out.println("The log file is not found or cannot be written.");
+            e.printStackTrace();
+        }
     }
 
 }

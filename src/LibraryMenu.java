@@ -25,37 +25,50 @@ public class LibraryMenu {
     public void displayMenu() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            if (scanner.nextLine().equalsIgnoreCase("exit")) {
-                break;
+            System.out.println("Please select a numerical option:");
+            System.out.println("1 to view all books");
+            System.out.println("2 to sort books by title");
+            System.out.println("3 to sort books by author");
+            System.out.println("4 to sort books by publication year");
+            System.out.println("5 to search for a book by its title");
+            System.out.println("6 to exit the menu");
+
+            String input = scanner.nextLine();
+            int option;
+            try {
+                option = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please make a selection from the menu above.");
+                continue;
             }
-            System.out.println("Please select a numerical option: ");
-            System.out.println("1 to view all books \n2 to sort books by keyword \n" +
-                    "3 sort books by author \n4 sort books by publication year \n" +
-                    "5 search for a book by its title \n6 exit the menu");
-            int option = scanner.nextInt();
+
             String word;
 
             switch (option) {
                 case 1:
                     logger.logViewAllBooks();
+                    library.viewAllBooks();
                     break;
                 case 2:
+                    System.out.println("Please enter a book title to sort by title:");
                     word = scanner.nextLine();
                     logger.logSort(word);
                     SortUtil.bubbleSort(library.getBooks(), Comparator.comparing(Book::getTitle));
                     break;
                 case 3:
+                    System.out.println("Please enter the author name to sort by name:");
                     word = scanner.nextLine();
                     logger.logSort(word);
                     SortUtil.bubbleSort(library.getBooks(), Comparator.comparing(Book::getAuthor));
                     break;
                 case 4:
-                    System.out.println("Please enter a keyword");
+                    System.out.println("Please enter the publication year to sort by publication year:");
                     word = scanner.nextLine();
                     logger.logSort(word);
                     SortUtil.bubbleSort(library.getBooks(), Comparator.comparing(Book::getPublicationYear));
                     break;
                 case 5:
+                    System.out.println("Please enter a keyword to search:");
                     word = scanner.nextLine();
                     Book foundBook = library.searchBookByKeyword(word);
                     if (foundBook != null) {
@@ -63,13 +76,14 @@ public class LibraryMenu {
                     } else {
                         System.out.println("Book not found.");
                     }
-                    logger.logSort(word);
+                    logger.logSearch(word);
                     break;
                 case 6:
-                    System.out.println("Exiting the program. Good buy!");
-                    break;
+                    System.out.println("Exiting the program. Goodbuy!");
+                    return;
                 default:
                     System.out.println("Invalid entry.");
+                    break;
             }
         }
     }
